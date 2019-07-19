@@ -10,7 +10,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "IEXTrading\\": "src/"
+      "IEXCloud\\": "src/"
     }
   },
   "require-dev": {
