@@ -120,14 +120,15 @@ class Client
      * @param integer $last
      * @return mixed
      */
-    public function balanceSheet($symbol, $period = 'quarter', $last = 1)
+    public function balanceSheet($symbol, $period = 'quarter', $last = 5)
     {
-        $url = $this->version . '/stock/' . $symbol . '/balance-sheet/last/' . $last;
+        $url = $this->version . '/stock/' . $symbol . '/balance-sheet';
 
         return $this->filterResponse(
             $this->httpClient->get($url, [
                 'query' => [
                     'period' => $period,
+                    'last' => $last,
                     'token' => $this->token,
                 ]
             ])
