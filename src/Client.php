@@ -195,6 +195,38 @@ class Client
     }
 
     /**
+     * @return mixed
+     */
+    public function symbols()
+    {
+        $url = $this->version . '/ref-data/symbols';
+
+        return $this->filterResponse(
+            $this->httpClient->get($url, [
+                'query' => [
+                    'token' => $this->token,
+                ]
+            ])
+        );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function exchanges()
+    {
+        $url = $this->version . '/ref-data/exchanges';
+
+        return $this->filterResponse(
+            $this->httpClient->get($url, [
+                'query' => [
+                    'token' => $this->token,
+                ]
+            ])
+        );
+    }
+
+    /**
      * @param string $symbol
      * @return mixed
      */
