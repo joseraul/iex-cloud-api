@@ -285,6 +285,24 @@ class Client
     }
 
     /**
+     * @param $isin
+     * @return mixed
+     */
+    public function isin($isin)
+    {
+        $url = $this->version . '/ref-data/isin';
+
+        return $this->filterResponse(
+            $this->httpClient->get($url, [
+                'query' => [
+                    'token' => $this->token,
+                    'isin' => $isin,
+                ],
+            ])
+        );
+    }
+
+    /**
      * Filter the response, try to maintain the original format.
      *
      * @param ResponseInterface $response
