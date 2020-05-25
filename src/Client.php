@@ -303,6 +303,25 @@ class Client
     }
 
     /**
+     * @param string $symbol
+     * @param integer $last
+     * @return mixed
+     */
+    public function financials($symbol, $last = 1)
+    {
+        $url = $this->version . '/stock/' . $symbol . '/financials';
+
+        return $this->filterResponse(
+            $this->httpClient->get($url, [
+                'query' => [
+                    'token' => $this->token,
+                    'last' => $last,
+                ],
+            ])
+        );
+    }
+
+    /**
      * Filter the response, try to maintain the original format.
      *
      * @param ResponseInterface $response
