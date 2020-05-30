@@ -29,12 +29,12 @@ class Client
      *
      * ResourceAbstract constructor.
      * @param HttpClient $httpClient
+     * @param array $curlOptions
      */
-    public function __construct(HttpClient $httpClient = null)
+    public function __construct(HttpClient $httpClient = null, $curlOptions = [])
     {
-        $this->httpClient = $httpClient ?? new HttpClient([
-            'base_uri' => self::BASE_URL
-        ]);
+        $curlOptions['base_uri'] = self::BASE_URL;
+        $this->httpClient = $httpClient ?? new HttpClient($curlOptions);
     }
 
     /**
