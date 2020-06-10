@@ -324,6 +324,69 @@ class Client
     }
 
     /**
+     * @return mixed
+     */
+    public function cryptoSymbols()
+    {
+        $url = $this->version . '/ref-data/crypto/symbols';
+
+        return $this->filterResponse(
+            $this->httpClient->get($url, [
+                'query' => [
+                    'token' => $this->token,
+                ]
+            ])
+        );
+    }
+
+    /**
+     * @param string $symbol
+     * @return mixed
+     */
+    public function cryptoPrice($symbol)
+    {
+        $url = $this->version . '/crypto/' . $symbol . '/price';
+
+        return $this->filterResponse(
+            $this->httpClient->get($url, [
+                'query' => [
+                    'token' => $this->token,
+                ]
+            ])
+        );
+    }
+
+    /**
+     * @param string $symbol
+     * @return mixed
+     */
+    public function cryptoQuote($symbol)
+    {
+        $url = $this->version . '/crypto/' . $symbol . '/quote';
+
+        return $this->filterResponse(
+            $this->httpClient->get($url, [
+                'query' => [
+                    'token' => $this->token,
+                ]
+            ])
+        );
+    }
+
+    public function cryptoBook($symbol)
+    {
+        $url = $this->version . '/crypto/' . $symbol . '/book';
+
+        return $this->filterResponse(
+            $this->httpClient->get($url, [
+                'query' => [
+                    'token' => $this->token,
+                ]
+            ])
+        );
+    }
+
+    /**
      * Filter the response, try to maintain the original format.
      *
      * @param ResponseInterface $response
