@@ -8,6 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 class Client
 {
     const BASE_URL = 'https://cloud.iexapis.com';
+    const SANDBOX_BASE_URL = 'https://sandbox.iexapis.com';
 
     /**
      * @var HttpClient
@@ -30,10 +31,11 @@ class Client
      * ResourceAbstract constructor.
      * @param HttpClient $httpClient
      * @param array $curlOptions
+     * @param bool $sandbox
      */
-    public function __construct(HttpClient $httpClient = null, $curlOptions = [])
+    public function __construct(HttpClient $httpClient = null, $curlOptions = [], $sandbox = false)
     {
-        $curlOptions['base_uri'] = self::BASE_URL;
+        $curlOptions['base_uri'] = $sandbox ? self::SANDBOX_BASE_URL : self::BASE_URL;
         $this->httpClient = $httpClient ?? new HttpClient($curlOptions);
     }
 
