@@ -387,6 +387,31 @@ class Client
     }
 
     /**
+     * @param string $symbol
+     * @param string $range
+     * @param string $date
+     * @param bool $chartCloseOnly
+     * @return mixed
+     */
+    public function historicalPrices($symbol, $range, $date = null, $chartCloseOnly = false)
+    {
+        $url = $this->version . '/stock/' . $symbol . '/chart/' . $range;
+
+        if ($date) {
+            $url .= '/' . $date;
+        }
+
+        return $this->filterResponse(
+            $this->httpClient->get($url, [
+                'query' => [
+                    'token' => $this->token,
+                    'chartCloseOnly' => $chartCloseOnly ? 'true' : 'false',
+                ],
+            ])
+        );
+    }
+
+    /**
      * Filter the response, try to maintain the original format.
      *
      * @param ResponseInterface $response
